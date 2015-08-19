@@ -1,13 +1,18 @@
 angular.module('npApp', [])
 
 .controller('NpCtrl', ['$scope', function($scope){
-    $scope.data = {count: 0, text: "hello"};
+    $scope.data = {count: 80, text: "hello"};
     $scope.cellMap = [
         [{id:1, val:1, style:'cell', x:0, y:0}, {id:2, val:2, style:'cell', x:0, y:1}, {id:3, val:3, style:'cell', x:0, y:2}, {id:4, val:4, style:'cell', x:0, y:3}],
         [{id:5, val:5, style:'cell', x:1, y:0}, {id:6, val:6, style:'cell', x:1, y:1}, {id:7, val:7, style:'cell', x:1, y:2}, {id:8, val:8, style:'cell', x:1, y:3}],
         [{id:9, val:9, style:'cell', x:2, y:0}, {id:10, val:10, style:'cell', x:2, y:1}, {id:11, val:11, style:'cell', x:2, y:2}, {id:12, val:12, style:'cell', x:2, y:3}],
         [{id:13, val:13, style:'cell', x:3, y:0}, {id:14, val:14, style:'cell', x:3, y:1}, {id:15, val:15, style:'cell', x:3, y:2}, {id:16, style:'empty-cell', x:3, y:3}]
     ];
+    // $scope.cellMap = [
+    //     [{id:1, val:1, style:'cell', x:0, y:0}, {id:2, val:2, style:'cell', x:0, y:1}, {id:3, val:3, style:'cell', x:0, y:2}],
+    //     [{id:4, val:4, style:'cell', x:1, y:0}, {id:5, val:5, style:'cell', x:1, y:1}, {id:6, val:6, style:'cell', x:1, y:2}],
+    //     [{id:7, val:7, style:'cell', x:2, y:0}, {id:8, val:8, style:'cell', x:2, y:1}, {id:9, style:'empty-cell', x:2, y:2}]
+    // ];
     $scope.numSteps = function() {
         return $scope.data.count;
     };
@@ -15,10 +20,10 @@ angular.module('npApp', [])
         return $scope.data.text;
     }
     $scope.swap = function(e1, e2) {
-        elemX = e1.attr("data-row");
-        elemY = e1.attr("data-col");
-        emptyX = e2.attr("data-row");
-        emptyY = e2.attr("data-col");
+        var elemX = e1.attr("data-row");
+        var elemY = e1.attr("data-col");
+        var emptyX = e2.attr("data-row");
+        var emptyY = e2.attr("data-col");
 
         //swap
         var t0 = $scope.cellMap[emptyX][emptyY].id;
@@ -110,11 +115,11 @@ angular.module('npApp', [])
                 onDragEnd:function(event) {
                     var emptyCell = $(".empty-cell"); //TODO: Selector major performance hit - fix
                     if(this.hitTest(emptyCell, overlapThreshold)) {
-                        scope.data.count += 1;
-                        scope.data.text += "-no-";
-
+                        scope.data.count--;
+                        // scope.data.text += "-no-";
                         scope.swap(iElm, emptyCell);
                     } else { //Restore element back to its original cell since it could have been dragged anywhere
+                        //TODO: element becomes un-draggable - fix it
                         iElm.css("-webkit-transform", "translate3d(0px, 0px, 0px)");
                         iElm.css("transform", "translate3d(0px, 0px, 0px)");
                         this._eventTarget._gsTransform.x = 0;
