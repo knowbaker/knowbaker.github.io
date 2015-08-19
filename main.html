@@ -14,15 +14,15 @@
 		<div class="navbar navbar-default" role="navigation">
 	        <div class="container-fluid">
 	        	<div class="navbar-header">
-		            <a id="tests" ng-click="shuffle()" class="navbar-brand" href="#">NPG</a> 
+		            <a id="tests" ng-click="shuffle()" class="navbar-brand" href="#">Shuffle Me</a> 
 	          	</div>
 	    	</div><!--/.container-fluid -->
       	</div> 
 
 
       	<div class="jumbotron">
-			<span class="label label-default">{{numSteps()}} steps</span>
-			<span class="label label-default">{{textMessage()}}</span>
+			<span class="label label-default">{{numSteps()}} steps remaining</span>
+			<!-- <span class="label label-default">{{textMessage()}}</span> -->
 			<!-- <h2>NP</h2> -->
 			<div id="gameArea" np-game>
 				<div class='row adjust-margin' ng-repeat='row in cellMap'>
