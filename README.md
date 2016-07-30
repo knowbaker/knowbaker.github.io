@@ -1,3 +1,3 @@
-NPGames
+N-Puzzle
 =======
-N-puzzle (N=16) game
+16-puzzle game
